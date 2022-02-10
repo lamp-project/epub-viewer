@@ -3,9 +3,9 @@ import { PackagingMetadataObject } from 'epubjs/types/packaging';
 import fileDialog from 'file-dialog';
 
 export class EpubBook {
-	public readonly metadata: PackagingMetadataObject;
-	public readonly cover: Blob;
-	public readonly content?: ArrayBuffer;
+	public metadata: PackagingMetadataObject;
+	public cover: Blob;
+	public content?: ArrayBuffer;
 
 	public static extractBookCover(book: Book) {
 		const { coverPath } = book.packaging;
