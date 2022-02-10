@@ -1,5 +1,5 @@
-import './EpubViewerBase';
-import './EpubViewer';
-import './EpubPaginator';
-import './PaginatedEpubViewer';
-import './StatefullPaginatedEpubViewer';
+export * from './EpubViewerBase';
+export * from './EpubViewer';
+export * from './EpubPaginator';
+export * from './PaginatedEpubViewer';
+export * from './StatefullPaginatedEpubViewer';
