@@ -2,8 +2,7 @@
 	"name": "@lamp-project/epub-viewer",
 	"version": "0.0.1",
 	"description": "",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"main": "src/index.ts",
 	"scripts": {
 		"build": "npm run clean & npm run build:source & npm run build:types",
 		"build:source": " esbuild ./src/index.ts --bundle --minify --sourcemap --outfile=dist/index.js",
