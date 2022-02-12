@@ -31,7 +31,7 @@ export class StatefullPaginatedEpubViewer extends PaginatedEpubViewer {
 		} else {
 			this.persistPagination();
 		}
-		this.on('item-updated', this.persistPagination.bind(this));
+		this.on('page-changed', this.persistPagination.bind(this));
 	}
 
 	protected persistPagination() {
@@ -68,20 +68,20 @@ export class StatefullPaginatedEpubViewer extends PaginatedEpubViewer {
 			this.pagination.currentLocation = location;
 			this.pagination.currentChapter = chapter;
 			this.pagination.currentPage = this.currentPage;
-			this.emit('item-updated');
+			this.emit('page-changed', this.pagination);
 		});
 
 		// pagination events
 		this.on('pagination-update', () => {
 			this.pagination.pages = this.pages;
 			this.pagination.currentPage = this.currentPage;
-			this.emit('item-updated');
+			this.emit('page-changed', this.pagination);
 		});
 
 		this.on('pagination-done', () => {
 			this.pagination.pages = this.pages;
 			this.pagination.size = this.size;
-			this.emit('item-updated');
+			this.emit('page-changed', this.pagination);
 		});
 	}
 }
