@@ -11,26 +11,17 @@ npm i https://github.com/lamp-project/epub-viewer
 ## Usage
 
 ```typescript
-import { StatefulPaginatedEpubViewer } from '@lamp-project/epub-viewer';
+import {
+ library,
+ StatefulPaginatedEpubViewer,
+} from '@lamp-project/epub-viewer';
 
-const viewer = new StatefulPaginatedEpubViewer(
-  id, // will use as key for localStorage state persistent
-  content, // Array buffer of the epub file
-);
+const epub = await library.addFromFileDialog();
+
+const viewer = new StatefulPaginatedEpubViewer(epub);
 
 await viewer.initialize();
 await viewer.display(targetDom);
-```
-
-### Utils
-
-Loading Ebook from file dialog:
-
-```typescript
-import { library } from '@lamp-project/epub-viewer';
-
-const bookId = await library.addFromFileDialog();
-const book = await library.get(bookId);
 ```
 
 ## Events

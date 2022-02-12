@@ -1,13 +1,26 @@
 import { v4 as uuid } from 'uuid';
 import fileDialog from 'file-dialog';
-import loadEbpub, { Book } from 'epubjs';
+import loadEbpub, { Book, Location } from 'epubjs';
 import { PackagingMetadataObject } from 'epubjs/types/packaging';
 
-export interface BookInfo extends PackagingMetadataObject {
-	id: string;
+export interface Size2D {
+	width: number;
+	height: number;
 }
 
-export abstract class Epub {
+export interface Pagination {
+	size: Size2D;
+	pages: string[];
+	currentPage: number | '-';
+	currentChapter: string;
+	currentLocation?: Location;
+}
+export interface BookInfo extends PackagingMetadataObject {
+	id: string;
+	pagination: Pagination;
+}
+
+export class Epub {
 	private static async extractCover(book: Book) {
 		await book.loaded.cover;
 		const { coverPath } = book.packaging;
@@ -22,30 +35,36 @@ export abstract class Epub {
 		return loadEbpub(content);
 	}
 
-	public static async getInfofromArrayBuffer(
-		content: ArrayBuffer,
-	): Promise<BookInfo> {
+	public static async fromArrayBuffer(content: ArrayBuffer): Promise<Epub> {
 		const book = loadEbpub(content);
 		const cover = await this.extractCover(book);
-		const info = {
+		const info: BookInfo = {
 			...JSON.parse(JSON.stringify(book.packaging?.metadata)),
 			cover,
 			id: uuid(),
+			pagination: {
+				pages: [],
+				currentPage: 1,
+				currentChapter: '',
+				size: { width: 0, height: 0 },
+				currentLocation: {
+					start: { displayed: { page: 0, total: -1 } },
+					end: { displayed: { page: 0, total: -1 } },
+				},
+			},
 		};
 		await book.destroy();
-		return info;
+		return new Epub(info, content);
 	}
 
-	public static async fromFileDialog(): Promise<{
-		content: ArrayBuffer;
-		info: BookInfo;
-	}> {
+	public static async fromFileDialog(): Promise<Epub> {
 		const selectedFiles = await fileDialog({ accept: 'application/epub+zip' });
 		const content = await selectedFiles.item(0).arrayBuffer();
-		const info = await this.getInfofromArrayBuffer(content);
-		return {
-			content,
-			info,
-		};
+		return this.fromArrayBuffer(content);
 	}
+
+	constructor(
+		public readonly info: BookInfo,
+		public readonly content: ArrayBuffer,
+	) {}
 }

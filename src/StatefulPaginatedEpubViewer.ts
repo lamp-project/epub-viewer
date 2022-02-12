@@ -1,48 +1,29 @@
-import * as Epub from 'epubjs';
 import { RenditionOptions } from 'epubjs/types/rendition';
-import { PaginatedEpubViewer } from './PaginatedEpubViewer';
-import { RelocatedEventPayload } from './EpubViewerBase';
-
-export interface Size2D {
-	width: number;
-	height: number;
-}
-
-export interface Pagination {
-	size: Size2D;
-	pages: string[];
-	currentPage: number | '-';
-	currentChapter: string;
-	currentLocation?: Epub.Location;
-}
+import {
+	Epub,
+	library,
+	BookInfo,
+	PaginatedEpubViewer,
+	RelocatedEventPayload,
+} from '.';
 
 export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
-	public readonly pagination: Pagination = {
-		pages: [],
-		currentPage: 1,
-		currentChapter: '',
-		size: { width: 0, height: 0 },
-	};
-	constructor(private readonly id: string, content: ArrayBuffer) {
-		super(content);
-		const value = localStorage.getItem(id);
-		if (value) {
-			this.pagination = JSON.parse(value);
-		} else {
-			this.persistPagination();
-		}
+	protected readonly bookInfo: BookInfo;
+	constructor(epub: Epub) {
+		super(epub.content);
+		this.bookInfo = epub.info;
 		this.on('page-changed', this.persistPagination.bind(this));
 	}
 
-	protected persistPagination() {
-		localStorage.setItem(this.id, JSON.stringify(this.pagination));
+	protected async persistPagination() {
+		await library.updateInfo(this.bookInfo);
 	}
 
 	public display(element: Element, options?: RenditionOptions): Promise<void> {
 		return super.display(
 			element,
 			options,
-			this.pagination.currentLocation?.start.cfi,
+			this.bookInfo.pagination.currentLocation?.start.cfi,
 		);
 	}
 
@@ -51,10 +32,10 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 	 */
 	protected paginate() {
 		if (
-			this.pagination.size.width === this.size.width &&
-			this.pagination.size.height === this.size.height
+			this.bookInfo.pagination.size.width === this.size.width &&
+			this.bookInfo.pagination.size.height === this.size.height
 		) {
-			this.pages = this.pagination.pages;
+			this.pages = this.bookInfo.pagination.pages;
 			console.log('pagination will load from cache');
 		} else {
 			return super.paginate();
@@ -65,23 +46,23 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 		super.registerEventListeners();
 		// rendition events
 		this.on('relocated', ({ location, chapter }: RelocatedEventPayload) => {
-			this.pagination.currentLocation = location;
-			this.pagination.currentChapter = chapter;
-			this.pagination.currentPage = this.currentPage;
-			this.emit('page-changed', this.pagination);
+			this.bookInfo.pagination.currentLocation = location;
+			this.bookInfo.pagination.currentChapter = chapter;
+			this.bookInfo.pagination.currentPage = this.currentPage;
+			this.emit('page-changed', this.bookInfo.pagination);
 		});
 
 		// pagination events
 		this.on('pagination-update', () => {
-			this.pagination.pages = this.pages;
-			this.pagination.currentPage = this.currentPage;
-			this.emit('page-changed', this.pagination);
+			this.bookInfo.pagination.pages = this.pages;
+			this.bookInfo.pagination.currentPage = this.currentPage;
+			this.emit('page-changed', this.bookInfo.pagination);
 		});
 
 		this.on('pagination-done', () => {
-			this.pagination.pages = this.pages;
-			this.pagination.size = this.size;
-			this.emit('page-changed', this.pagination);
+			this.bookInfo.pagination.pages = this.pages;
+			this.bookInfo.pagination.size = this.size;
+			this.emit('page-changed', this.bookInfo.pagination);
 		});
 	}
 }
