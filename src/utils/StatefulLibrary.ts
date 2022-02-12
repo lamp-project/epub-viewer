@@ -38,10 +38,10 @@ export class StatefulLibrary extends EventEmitter {
 		return Promise.all(keys.map((key) => this.getInfo(key)));
 	}
 
-	public async get(id: string): Promise<Book> {
+	public async get(id: string): Promise<ArrayBuffer> {
 		const content = await shelf.getItem<ArrayBuffer>(id);
 		await memory.setItem(LAST_BOOK_ID, id);
-		return Epub.load(content);
+		return content;
 	}
 
 	public async getInfo(id: string): Promise<BookInfo> {
