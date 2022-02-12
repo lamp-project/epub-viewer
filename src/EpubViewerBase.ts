@@ -18,6 +18,11 @@ export interface RelocatedEventPayload {
 	chapter?: string;
 }
 
+export interface ContentEventPayload {
+	contents: Contents;
+	view: Rendition;
+}
+
 export class EpubViewerBase extends EventEmitter {
 	protected element: Element;
 	protected rendition: Rendition;
@@ -77,7 +82,7 @@ export class EpubViewerBase extends EventEmitter {
 		});
 		this.rendition.hooks.content.register(
 			(contents: Contents, view: Rendition) => {
-				this.emit('contents', { contents, view });
+				this.emit('contents', { contents, view } as ContentEventPayload);
 			},
 		);
 		// gestures events
