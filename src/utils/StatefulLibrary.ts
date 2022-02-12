@@ -8,7 +8,7 @@ const catalogue = localforage.createInstance({ name: 'catalogue' });
 const shelf = localforage.createInstance({ name: 'shelf' });
 const memory = localforage.createInstance({ name: 'memory' });
 
-class StatefulLibrary extends EventEmitter {
+export class StatefulLibrary extends EventEmitter {
 	/**
 	 * @returns id of the new library item
 	 */
