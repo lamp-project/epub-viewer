@@ -27,9 +27,10 @@ await viewer.display(targetDom);
 Loading Ebook from file dialog:
 
 ```typescript
-import { EpubBookMetadata } from '@lamp-project/epub-viewer';
+import { library } from '@lamp-project/epub-viewer';
 
-const { content, metadata } = await EpubBookMetadata.fromFileDialog();
+const bookId = await library.addFromFileDialog();
+const book = await library.get(bookId);
 ```
 
 ## Events

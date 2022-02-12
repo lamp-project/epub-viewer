@@ -23,6 +23,8 @@
 		"debounce": "^1.2.1",
 		"epubjs": "^0.3.92",
 		"eventemitter3": "^4.0.7",
-		"file-dialog": "^0.0.8"
+		"file-dialog": "^0.0.8",
+		"localforage": "^1.10.0",
+		"uuid": "^8.3.2"
 	}
 }

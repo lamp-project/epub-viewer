@@ -1,4 +1,5 @@
-export * from './EpubBookMetadata';
+export * from './utils/Epub';
+export * from './utils/StatefulLibrary';
 export * from './EpubViewerBase';
 export * from './EpubViewer';
 export * from './EpubPaginator';
