@@ -16,7 +16,7 @@ export interface Pagination {
 	currentLocation?: Epub.Location;
 }
 
-export class StatefullPaginatedEpubViewer extends PaginatedEpubViewer {
+export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 	public readonly pagination: Pagination = {
 		pages: [],
 		currentPage: 1,

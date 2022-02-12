@@ -11,9 +11,9 @@ npm i https://github.com/lamp-project/epub-viewer
 ## Usage
 
 ```typescript
-import { StatefullPaginatedEpubViewer } from '@lamp-project/epub-viewer';
+import { StatefulPaginatedEpubViewer } from '@lamp-project/epub-viewer';
 
-const viewer = new StatefullPaginatedEpubViewer(
+const viewer = new StatefulPaginatedEpubViewer(
   id, // will use as key for localStorage state persistent
   content, // Array buffer of the epub file
 );
