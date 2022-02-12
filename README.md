@@ -22,6 +22,16 @@ await viewer.initialize();
 await viewer.display(targetDom);
 ```
 
+### Utils
+
+Loading Ebook from file dialog:
+
+```typescript
+import { EpubBookMetadata } from '@lamp-project/epub-viewer';
+
+const { content, metadata } = await EpubBookMetadata.fromFileDialog();
+```
+
 ## Events
 
 ### Rendering
