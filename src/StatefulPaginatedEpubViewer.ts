@@ -29,6 +29,7 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 		
 		// @ts-ignore
 		if (this.rendition.currentLocation().end.cfi !== cfi) {
+			console.warn(`Last location didn't load normal: ${cfi}`);
 			return this.goTo(cfi);
 		}
 	}
