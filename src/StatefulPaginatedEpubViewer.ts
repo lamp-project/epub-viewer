@@ -23,7 +23,7 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 		return super.display(
 			element,
 			options,
-			this.bookInfo.pagination.currentLocation?.start.cfi,
+			this.bookInfo.pagination.currentLocation?.end.cfi,
 		);
 	}
 

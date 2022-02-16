@@ -26,6 +26,10 @@ export class PaginatedEpubViewer extends EpubViewer {
 		target?: string,
 	) {
 		await super.display(element, options, target);
+		// @ts-ignore
+		if (this.rendition.currentLocation().end.cfi !== target) {
+			return this.goTo(target);
+		}
 		await this.paginate();
 	}
 
