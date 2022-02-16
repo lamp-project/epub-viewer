@@ -19,12 +19,18 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 		await library.updateInfo(this.bookInfo);
 	}
 
-	public display(element: Element, options?: RenditionOptions): Promise<void> {
-		return super.display(
+	public async display(element: Element, options?: RenditionOptions): Promise<void> {
+		const cfi = this.bookInfo.pagination.currentLocation?.end.cfi;
+		await super.display(
 			element,
 			options,
-			this.bookInfo.pagination.currentLocation?.end.cfi,
+			cfi,
 		);
+		
+		// @ts-ignore
+		if (this.rendition.currentLocation().end.cfi !== cfi) {
+			return this.goTo(cfi);
+		}
 	}
 
 	/**
