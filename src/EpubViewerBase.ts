@@ -83,11 +83,11 @@ export class EpubViewerBase extends EventEmitter {
 		});
 		this.rendition.hooks.content.register(
 			(contents: Contents, view: Rendition) => {
-				this.emit('content', contents.content);
+				this.emit('content', contents);
 			},
 		);
 		this.rendition.hooks.render.register((iframeView) => {
-			this.emit('render', iframeView.document.body);
+			this.emit('render', iframeView.document);
 		});
 		// gestures events
 		this.listenRenditionGestureEvents();

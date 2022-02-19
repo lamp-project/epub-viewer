@@ -29,8 +29,8 @@ await viewer.display(targetDom);
 ### Rendering
 
 * `relocated`: on new page rendered. returns a `RelocatedEventPayload` object.
-* `content`: on new content loaded. returns a `HTMLBodyElement` object.
-* `render`: on new content rendered. returns a `HTMLBodyElement` object.
+* `content`: on new content loaded. returns a `HTMLHtmlElement` object.
+* `render`: on new content rendered. returns a `HTMLHtmlElement` object.
 * `page-changed`: on page changes. sends a `Pagination` object.
 
 ### Pagination
