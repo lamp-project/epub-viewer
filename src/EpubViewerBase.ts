@@ -59,6 +59,7 @@ export class EpubViewerBase extends EventEmitter {
 			width: '100%',
 			height: '100%',
 			...options,
+			allowScriptedContent: true,
 		});
 		this.registerEventListeners();
 		this.registerThemes();
@@ -85,11 +86,9 @@ export class EpubViewerBase extends EventEmitter {
 				this.emit('content', contents.content);
 			},
 		);
-		this.rendition.hooks.render.register(
-			(contents: Contents, view: Rendition) => {
-				this.emit('render', contents.content);
-			},
-		);
+		this.rendition.hooks.render.register((iframeView) => {
+			this.emit('render', iframeView.document.body);
+		});
 		// gestures events
 		this.listenRenditionGestureEvents();
 	}
