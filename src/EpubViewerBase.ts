@@ -73,7 +73,7 @@ export class EpubViewerBase extends EventEmitter {
 	protected registerEventListeners() {
 		// rendition events
 		this.rendition.on('relocated', (location: Location) => {
-			this.currentLocation = location.start.cfi;
+			this.currentLocation = location.end.cfi;
 			this.currentChapter = this.getChapter(location.start.href);
 			this.emit('relocated', {
 				location,

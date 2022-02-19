@@ -34,10 +34,10 @@ export class EpubPaginator extends EpubViewerBase {
   }
 
   private listenRelocate({ location }: RelocatedEventPayload) {
-    this.pages.push(location.start.cfi);
+    this.pages.push(location.end.cfi);
     this.emit('paginate', {
       pages: this.pages,
-      cfi: location.start.cfi,
+      cfi: location.end.cfi,
     } as PaginateEventPayload);
     if (location.atEnd) {
       this.emit('done', this.pages);

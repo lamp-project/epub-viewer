@@ -20,17 +20,17 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 	}
 
 	public async display(element: Element, options?: RenditionOptions): Promise<void> {
-		const cfi = this.bookInfo.pagination.currentLocation?.end.cfi;
+		const lastLocation = this.bookInfo.pagination.currentLocation?.end.cfi;
 		await super.display(
 			element,
 			options,
-			cfi,
+			lastLocation,
 		);
 		
 		// @ts-ignore
-		if (this.rendition.currentLocation().end.cfi !== cfi) {
-			console.warn(`Last location didn't load normal: ${cfi}`);
-			return this.goTo(cfi);
+		if (this.rendition.currentLocation().end.cfi !== lastLocation) {
+			console.warn(`Last location didn't load normal: ${lastLocation}`);
+			return this.goTo(lastLocation);
 		}
 	}
 
