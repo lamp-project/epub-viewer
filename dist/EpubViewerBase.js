@@ -107,4 +107,3 @@ export class EpubViewerBase extends EventEmitter {
     });
   }
 }
-//# sourceMappingURL=EpubViewerBase.js.map

@@ -48,4 +48,3 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
     });
   }
 }
-//# sourceMappingURL=StatefulPaginatedEpubViewer.js.map

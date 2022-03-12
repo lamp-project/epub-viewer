@@ -41,4 +41,3 @@ export class StatefulLibrary extends EventEmitter {
   }
 }
 export const library = new StatefulLibrary();
-//# sourceMappingURL=StatefulLibrary.js.map

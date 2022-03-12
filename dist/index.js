@@ -5,4 +5,3 @@ export * from "./EpubViewer";
 export * from "./EpubPaginator";
 export * from "./PaginatedEpubViewer";
 export * from "./StatefulPaginatedEpubViewer";
-//# sourceMappingURL=index.js.map

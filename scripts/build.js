@@ -8,7 +8,7 @@ const glob = require("tiny-glob");
 		outdir: 'dist',
 		bundle: false,
 		// minify: true,
-		sourcemap: true,
+		sourcemap: false,
 		platform: 'browser',
 	});
 })().catch(() => {

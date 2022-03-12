@@ -45,4 +45,3 @@ export class EpubPaginator extends EpubViewerBase {
     this.rendition.destroy();
   }
 }
-//# sourceMappingURL=EpubPaginator.js.map

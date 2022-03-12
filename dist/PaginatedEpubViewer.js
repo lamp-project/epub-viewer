@@ -45,4 +45,3 @@ export class PaginatedEpubViewer extends EpubViewer {
     super.destroy();
   }
 }
-//# sourceMappingURL=PaginatedEpubViewer.js.map

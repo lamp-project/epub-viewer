@@ -33,4 +33,3 @@ export class EpubViewer extends EpubViewerBase {
     ((_b = (_a = this.book.packaging) == null ? void 0 : _a.metadata) == null ? void 0 : _b.direction) === "rtl" ? this.rendition.prev() : this.rendition.next();
   }
 }
-//# sourceMappingURL=EpubViewer.js.map

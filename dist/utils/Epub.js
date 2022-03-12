@@ -46,4 +46,3 @@ export class Epub {
     return this.fromArrayBuffer(content);
   }
 }
-//# sourceMappingURL=Epub.js.map
