@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/index.ts"],
+  "sourcesContent": ["export * from './utils/Epub';\nexport * from './utils/StatefulLibrary';\nexport * from './EpubViewerBase';\nexport * from './EpubViewer';\nexport * from './EpubPaginator';\nexport * from './PaginatedEpubViewer';\nexport * from './StatefulPaginatedEpubViewer';\n"],
+  "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;",
+  "names": []
+}
