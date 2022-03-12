@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "dist/index.js",
 	"scripts": {
-		"build": "npm run clean & npm run build:source & npm run build:types",
+		"build": "npm run clean & npm run build:source",
 		"build:source": "node scripts/build.js",
 		"build:types": "tsc --emitDeclarationOnly --declaration --project tsconfig.json",
 		"clean": "rimraf dist"
