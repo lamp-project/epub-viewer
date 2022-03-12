@@ -1,1 +1,8 @@
-tsconfig.json 
+scripts      
+src
+.editorconfig
+.gitignore  
+.npmignore
+.prettierignore
+.prettierrc
+tsconfig.json
