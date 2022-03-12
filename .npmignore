@@ -1,8 +1,11 @@
-scripts      
 src
-.editorconfig
-.gitignore  
+test
+.eslintignore
+.eslintrc
+.gitignore
 .npmignore
-.prettierignore
 .prettierrc
+jest.config.js
+renovate.json
+SECURITY.md
 tsconfig.json

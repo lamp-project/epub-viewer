@@ -7,6 +7,8 @@ export class EpubViewer extends EpubViewerBase {
 
   public async initialize() {
     await super.initialize(this.input);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     delete this.input;
   }
 
@@ -16,11 +18,7 @@ export class EpubViewer extends EpubViewerBase {
     this.rendition.on('swipe:right', this.applyRightEvent.bind(this));
     // keybaord events
     this.rendition.on('keyup', this.listenKeyUpEvents.bind(this));
-    document.addEventListener(
-      'keyup',
-      this.listenKeyUpEvents.bind(this),
-      false
-    );
+    document.addEventListener('keyup', this.listenKeyUpEvents.bind(this), false);
     // mouse events
     this.rendition.on('click', () => this.emit('click-tap'));
   }
@@ -37,16 +35,14 @@ export class EpubViewer extends EpubViewerBase {
   }
 
   private applyRightEvent() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    this.book.packaging?.metadata?.direction === 'rtl'
-      ? this.rendition.next()
-      : this.rendition.prev();
+    this.book.packaging?.metadata?.direction === 'rtl' ? this.rendition.next() : this.rendition.prev();
   }
 
   private applyLeftEvent() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    this.book.packaging?.metadata?.direction === 'rtl'
-      ? this.rendition.prev()
-      : this.rendition.next();
+    this.book.packaging?.metadata?.direction === 'rtl' ? this.rendition.prev() : this.rendition.next();
   }
 }

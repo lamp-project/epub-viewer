@@ -15,7 +15,7 @@ export interface TouchEvent {
 
 export interface RelocatedEventPayload {
 	location: Location;
-	chapter?: string;
+	chapter: string;
 }
 
 export interface ContentEventPayload {
@@ -24,10 +24,10 @@ export interface ContentEventPayload {
 }
 
 export class EpubViewerBase extends EventEmitter {
-	protected element: Element;
-	protected rendition: Rendition;
-	protected currentLocation: string;
-	protected currentChapter: string;
+	protected element!: Element;
+	protected rendition!: Rendition;
+	protected currentLocation!: string;
+	protected currentChapter!: string;
 	constructor(protected readonly book = Epub()) {
 		super();
 	}
@@ -86,7 +86,7 @@ export class EpubViewerBase extends EventEmitter {
 				this.emit('content', contents.document);
 			},
 		);
-		this.rendition.hooks.render.register((iframeView) => {
+		this.rendition.hooks.render.register((iframeView: { document: any; }) => {
 			this.emit('render', iframeView.document);
 		});
 		// gestures events
@@ -141,7 +141,7 @@ export class EpubViewerBase extends EventEmitter {
 			moved: false,
 		};
 
-		this.rendition.on('touchstart', (event) => {
+		this.rendition.on('touchstart', (event: any) => {
 			touchEvent.moved = false;
 			touchEvent.start.x = event.changedTouches[0].screenX;
 			touchEvent.start.y = event.changedTouches[0].screenY;
@@ -151,7 +151,7 @@ export class EpubViewerBase extends EventEmitter {
 			touchEvent.moved = true;
 		});
 
-		this.rendition.on('touchend', (event) => {
+		this.rendition.on('touchend', (event: any) => {
 			touchEvent.end.x = event.changedTouches[0].screenX;
 			touchEvent.end.y = event.changedTouches[0].screenY;
 			const gesture = this.handleEvent(touchEvent);

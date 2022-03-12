@@ -27,8 +27,9 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 			lastLocation,
 		);
 		
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		if (this.rendition.currentLocation().end.cfi !== lastLocation) {
+		if (lastLocation && this.rendition.currentLocation().end.cfi !== lastLocation) {
 			console.warn(`Last location didn't load normal: ${lastLocation}`);
 			return this.goTo(lastLocation);
 		}
@@ -37,7 +38,7 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 	/**
 	 * Skipping pagination if exists
 	 */
-	protected paginate() {
+	protected async paginate() {
 		if (
 			this.bookInfo.pagination.size.width === this.size.width &&
 			this.bookInfo.pagination.size.height === this.size.height
@@ -45,7 +46,7 @@ export class StatefulPaginatedEpubViewer extends PaginatedEpubViewer {
 			this.pages = this.bookInfo.pagination.pages;
 			console.log('pagination will load from cache');
 		} else {
-			return super.paginate();
+			super.paginate();
 		}
 	}
 

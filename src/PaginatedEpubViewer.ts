@@ -13,8 +13,8 @@ export interface PaginationDoneEventPayload {
 }
 
 export class PaginatedEpubViewer extends EpubViewer {
-	protected paginator: EpubPaginator;
-	protected pages: string[];
+	protected paginator?: EpubPaginator;
+	protected pages!: string[];
 
 	public get currentPage() {
 		return this.pages ? this.pages.indexOf(this.currentLocation) + 1 : '-';
@@ -58,7 +58,7 @@ export class PaginatedEpubViewer extends EpubViewer {
 		// paginate again after any resize
 		this.rendition.on(
 			'resized',
-			debounce(async ({ width, height }) => {
+			debounce(async ({ width, height }: any) => {
 				console.log(`Resized: ${width}x${height}`);
 				await this.paginate();
 			}, 500),

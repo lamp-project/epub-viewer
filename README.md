@@ -44,3 +44,7 @@ await viewer.display(targetDom);
 * `swipe:right`: gusture event
 * `tap`: on tap
 * `click-tap`: on tap or click
+
+## Boilerplate
+
+<https://github.com/hebertcisco/ts-npm-package-boilerplate>
