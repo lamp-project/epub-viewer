@@ -9,7 +9,7 @@ const glob = require("tiny-glob");
 		bundle: false,
 		// minify: true,
 		sourcemap: true,
-		platform: 'node',
+		platform: 'browser',
 	});
 })().catch(() => {
 	process.exit(1);
