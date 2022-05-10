@@ -1,37 +1,50 @@
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/leojaimesson/typescript-package-boilerplate/blob/master/LICENSE.md)
-[![nodejs badge](https://img.shields.io/badge/type-nodejs-green.svg)](https://nodejs.org/en/)
-[![typescript badge](https://img.shields.io/badge/type-typescript-blue.svg)](https://www.typescriptlang.org/)
+# Statefull Pagniated Epub Viewer
 
-# typescript-package-boilerplate
+A wrapper around epubjs project.
 
-Minimalistic boilerplate to start a package in Node Js with TypeScript for personal projects.
+## Installation
 
-## Quick start
-
-To start, just clone the repository with following commands:
-
-- clone using `HTTP`
-
-```sh
-git clone https://github.com/leojaimesson/typescript-package-boilerplate.git
-cd typescript-package-boilerplate
-npm install
+```bash
+npm i "@derock.ir/epubjs-plus"
 ```
 
-- clone using `SSH`
+## Usage
 
-```sh
-git clone git@github.com:leojaimesson/typescript-package-boilerplate.git
-cd typescript-package-boilerplate
-npm install
+```typescript
+import {
+ library,
+ StatefulPaginatedEpubViewer,
+} from '@derock.ir/epubjs-plus';
+
+const epub = await library.addFromFileDialog();
+
+const viewer = new StatefulPaginatedEpubViewer(epub);
+
+await viewer.initialize();
+await viewer.display(targetDom);
 ```
 
-## Available scripts
+## Events
 
-+ `clean` - remove coverage data, Nyc cache and transpiled files,
-+ `clean:modules` - remove and reinstall node_modules packages and package-lock.json,
-+ `build` - transpile TypeScript to ES5,
-+ `lint` - lint source files and tests,
-+ `test` - run tests,
-+ `test:watch` - interactive watch mode to automatically re-run tests
-+ `test:coverage` - run tests and create code coverage reports
+### Rendering
+
+* `relocated`: on new page rendered. returns a `RelocatedEventPayload` object.
+* `content`: on new content loaded. returns a `Document` object.
+* `render`: on new content rendered. returns a `Document` object.
+* `page-changed`: on page changes. sends a `Pagination` object.
+
+### Pagination
+
+* `pagination-update`: on pagination info update. sends a `PaginationUpdateEventPayload` object.
+* `pagination-done`: on pagination finished. sends a `PaginationDoneEventPayload` object.
+
+### Input events
+
+* `swipe:left`: gusture event
+* `swipe:right`: gusture event
+* `tap`: on tap
+* `click-tap`: on tap or click
+
+## Boilerplate
+
+<https://github.com/hebertcisco/ts-npm-package-boilerplate>
