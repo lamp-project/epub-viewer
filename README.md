@@ -5,7 +5,7 @@ A wrapper around epubjs project.
 ## Installation
 
 ```bash
-npm i https://github.com/lamp-project/epub-viewer 
+npm i "@derock.ir/epubjs-plus"
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ npm i https://github.com/lamp-project/epub-viewer
 import {
  library,
  StatefulPaginatedEpubViewer,
-} from '@lamp-project/epub-viewer';
+} from '@derock.ir/epubjs-plus';
 
 const epub = await library.addFromFileDialog();
 
