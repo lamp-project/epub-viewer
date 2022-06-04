@@ -28,6 +28,14 @@ export class StatefulLibrary extends EventEmitter {
     }
   }
 
+  /**
+   * @returns the new library item
+   */
+  public async addFromArrayBuffer(content: ArrayBuffer): Promise<Epub> {
+    const item = await Epub.fromArrayBuffer(content);
+    return this.add(item);
+  }
+
   public async remove(id: string): Promise<void> {
     await catalogue.removeItem(id);
     await shelf.removeItem(id);
