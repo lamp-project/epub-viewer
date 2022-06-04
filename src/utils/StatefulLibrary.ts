@@ -11,9 +11,9 @@ export class StatefulLibrary extends EventEmitter {
   /**
    * @returns the new library item
    */
-  public async add(epub: Epub, id?: string): Promise<Epub> {
-    await catalogue.setItem(id ?? epub.info.id, epub.info);
-    await shelf.setItem(id ?? epub.info.id, epub.content);
+  public async add(epub: Epub, id: string): Promise<Epub> {
+    await catalogue.setItem(id, epub.info);
+    await shelf.setItem(id, epub.content);
     this.emit('item-added', epub.info);
     return epub;
   }
@@ -24,7 +24,7 @@ export class StatefulLibrary extends EventEmitter {
   public async addFromFileDialog(): Promise<Epub | undefined> {
     const item = await Epub.fromFileDialog();
     if (item) {
-      return this.add(item);
+      return this.add(item, item.info.id);
     }
   }
 
