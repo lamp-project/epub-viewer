@@ -11,9 +11,9 @@ export class StatefulLibrary extends EventEmitter {
   /**
    * @returns the new library item
    */
-  public async add(epub: Epub): Promise<Epub> {
-    await catalogue.setItem(epub.info.id, epub.info);
-    await shelf.setItem(epub.info.id, epub.content);
+  public async add(epub: Epub, id?: string): Promise<Epub> {
+    await catalogue.setItem(id ?? epub.info.id, epub.info);
+    await shelf.setItem(id ?? epub.info.id, epub.content);
     this.emit('item-added', epub.info);
     return epub;
   }
@@ -31,9 +31,9 @@ export class StatefulLibrary extends EventEmitter {
   /**
    * @returns the new library item
    */
-  public async addFromArrayBuffer(content: ArrayBuffer): Promise<Epub> {
+  public async addFromArrayBuffer(content: ArrayBuffer, id?: string): Promise<Epub> {
     const item = await Epub.fromArrayBuffer(content);
-    return this.add(item);
+    return this.add(item, id);
   }
 
   public async remove(id: string): Promise<void> {
