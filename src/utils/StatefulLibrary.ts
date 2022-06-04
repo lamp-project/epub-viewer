@@ -31,8 +31,8 @@ export class StatefulLibrary extends EventEmitter {
   /**
    * @returns the new library item
    */
-  public async addFromArrayBuffer(content: ArrayBuffer, id?: string): Promise<Epub> {
-    const item = await Epub.fromArrayBuffer(content);
+  public async addFromArrayBuffer(content: ArrayBuffer, id: string): Promise<Epub> {
+    const item = await Epub.fromArrayBuffer(content, id);
     return this.add(item, id);
   }
 

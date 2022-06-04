@@ -35,13 +35,13 @@ export class Epub {
     return loadEbpub(content);
   }
 
-  public static async fromArrayBuffer(content: ArrayBuffer): Promise<Epub> {
+  public static async fromArrayBuffer(content: ArrayBuffer, id: string): Promise<Epub> {
     const book = loadEbpub(content);
     const cover = await this.extractCover(book);
     const info: BookInfo = {
       ...JSON.parse(JSON.stringify(book.packaging?.metadata)),
       cover,
-      id: uuid(),
+      id,
       pagination: {
         pages: [],
         currentPage: 1,
@@ -61,7 +61,7 @@ export class Epub {
     const selectedFiles = await fileDialog({ accept: 'application/epub+zip' });
     const content = await selectedFiles.item(0)?.arrayBuffer();
     if (content) {
-      return this.fromArrayBuffer(content);
+      return this.fromArrayBuffer(content, uuid());
     }
   }
 
