@@ -12,7 +12,7 @@ export interface Pagination {
   size: Size2D;
   pages: string[];
   currentPage: number | '-';
-  currentChapter: string;
+  currentChapter?: string;
   currentLocation?: Location;
 }
 export interface BookInfo extends PackagingMetadataObject {
