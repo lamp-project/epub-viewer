@@ -42,9 +42,9 @@ export class StatefulLibrary extends EventEmitter {
     this.emit('item-removed', id);
   }
 
-  public async index(): Promise<(BookInfo | null)[]> {
+  public async index(): Promise<BookInfo[]> {
     const keys = await catalogue.keys();
-    return Promise.all(keys.map((key) => this.getInfo(key)));
+    return Promise.all(keys.map((key) => this.getInfo(key) as any));
   }
 
   public async get(id: string): Promise<Epub | null> {

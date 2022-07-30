@@ -18,6 +18,7 @@ export interface Pagination {
 export interface BookInfo extends PackagingMetadataObject {
   id: string;
   pagination: Pagination;
+  cover?: Blob;
 }
 
 export class Epub {
