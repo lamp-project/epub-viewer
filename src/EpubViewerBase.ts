@@ -15,7 +15,7 @@ export interface TouchEvent {
 
 export interface RelocatedEventPayload {
   location: Location;
-  chapter: string;
+  chapter?: string;
 }
 
 export interface ContentEventPayload {
@@ -27,7 +27,7 @@ export class EpubViewerBase extends EventEmitter {
   protected element!: Element;
   protected rendition!: Rendition;
   protected currentLocation!: string;
-  protected currentChapter!: string;
+  protected currentChapter?: string;
   constructor(protected readonly book = Epub()) {
     super();
   }
@@ -87,9 +87,19 @@ export class EpubViewerBase extends EventEmitter {
     this.listenRenditionGestureEvents();
   }
 
-  protected getChapter(href: string) {
-    const [toc] = this.book.navigation.toc.filter((toc) => toc.href.includes(href));
-    return toc?.label.trim();
+  protected getChapter(href: string, toc = this.book.navigation.toc): string | undefined {
+    for (const item of toc) {
+      const chapter = item?.label.trim();
+      if (item.href.includes(href)) {
+        return chapter;
+      } else if (item.subitems?.length) {
+        const subChapter = this.getChapter(href, item.subitems);
+        if (subChapter) {
+          return `${chapter} - ${subChapter}`;
+        }
+      }
+    }
+    return undefined;
   }
 
   protected registerThemes() {
